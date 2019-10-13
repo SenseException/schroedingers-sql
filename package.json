@@ -1,0 +1,13 @@
+{
+  "name": "doctrine-database-talk",
+  "description": "Reveal.js slides of the doctrine + database talk",
+  "version": "1.0.0",
+  "license": "MIT",
+  "dependencies": {
+    "reveal.js": "^3.6"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/npm/npm.git"
+  }
+}
