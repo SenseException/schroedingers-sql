@@ -379,7 +379,7 @@
     $movie = $entityManager->createQuery(
             "SELECT m, l FROM Movie m
             JOIN m.languages l
-            WHERE l.iso6391 = 'it' AND f.name = 'The Mutex'"
+            WHERE l.iso6391 = 'it' AND m.name = 'The Mutex'"
         )
         ->getResult();
 
@@ -410,7 +410,7 @@
     $movie = $entityManager->createQuery(
             "SELECT m, l FROM Movie m
             JOIN m.languages l
-            WHERE l.iso6391 = 'it' AND f.name = 'The Mutex'"
+            WHERE l.iso6391 = 'it' AND m.name = 'The Mutex'"
         )
         ->getResult();
 
