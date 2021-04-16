@@ -78,6 +78,7 @@
                 <li>SQL:2008</li>
                 <li>SQL:2011</li>
                 <li>SQL:2016</li>
+                <li>SQL:2019</li>
             </ul>
         </section>
 
@@ -410,7 +411,7 @@
     $movie = $entityManager->createQuery(
             "SELECT m, l FROM Movie m
             JOIN m.languages l
-            WHERE l.iso6391 = 'it' AND m.name = 'The Mutex'"
+            WHERE l.iso6391 = 'it' AND f.name = 'The Mutex'"
         )
         ->getResult();
 
@@ -424,19 +425,8 @@
 
             <pre><code class="php">
     $entityManager->clear();
-    $entityManager->clear(Entity::class);
+    $entityManager->clear(Entity::class); // Deprecated
             </code></pre>
-
-        </section>
-        
-        <section class="top">
-            <h3>The Entity Reloaded</h3>
-
-            <pre><code class="php">
-    $entityManager->reload($entity);
-            </code></pre>
-
-        </section>
 
         <!--Lazy Loading-->
 
