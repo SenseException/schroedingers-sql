@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="../node_modules/reveal.js/css/reveal.css">
+    <link rel="stylesheet" href="../node_modules/reveal.js/css/theme/simple.css" id="theme">
+    <link rel="stylesheet" href="css/default.css">
+    <link rel="stylesheet" href="../node_modules/reveal.js/lib/css/zenburn.css">
+    <link rel="stylesheet" media="print" href="../node_modules/reveal.js/css/print/pdf.css">
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section data-background="../images/title.jpg" class="top">
+            <!--            <a class="credit-badge" href="https://unsplash.com/@skylergeraldphoto?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge" target="_blank" rel="noopener noreferrer">
+                            <span style="display:inline-block;padding:2px 3px">
+                                <svg xmlns="http://www.w3.org/2000/svg" style="height:12px;width:auto;position:relative;vertical-align:middle;top:-1px;fill:white" viewBox="0 0 32 32"><title>unsplash-logo</title><path d="M20.8 18.1c0 2.7-2.2 4.8-4.8 4.8s-4.8-2.1-4.8-4.8c0-2.7 2.2-4.8 4.8-4.8 2.7.1 4.8 2.2 4.8 4.8zm11.2-7.4v14.9c0 2.3-1.9 4.3-4.3 4.3h-23.4c-2.4 0-4.3-1.9-4.3-4.3v-15c0-2.3 1.9-4.3 4.3-4.3h3.7l.8-2.3c.4-1.1 1.7-2 2.9-2h8.6c1.2 0 2.5.9 2.9 2l.8 2.4h3.7c2.4 0 4.3 1.9 4.3 4.3zm-8.6 7.5c0-4.1-3.3-7.5-7.5-7.5-4.1 0-7.5 3.4-7.5 7.5s3.3 7.5 7.5 7.5c4.2-.1 7.5-3.4 7.5-7.5z"></path></svg>
+                            </span><span style="display:inline-block;padding:2px 3px">Skyler Gerald</span>
+                        </a>-->
+            <div class="bg">
+                <h1>Schrödinger's SQL</h1>
+                <h4>The SQL inside the ORM/Builder box</h4>
+            </div>
+            <img style="position: absolute; bottom: 0; right: -100px" src="../images/ipc.png" alt="logo" height="120" width="264">
+        </section>
+
+        <section>
+            <div style="text-align: left">
+                Claudio Zizza<br><br>
+                Developer for 20 years<br>
+                (Currently PHP)<br><br>
+                Organizing PHP Usergroup Karlsruhe<br><br>
+                Part of Doctrine: <a rel="nofollow noreferrer" target="_blank" href="https://www.doctrine-project.org">doctrine-project.org</a><br>
+                PHP Snippets: <a rel="nofollow noreferrer" target="_blank" href="https://php.budgegeria.de">php.budgegeria.de</a><br><br>
+                Twitter: <a rel="nofollow noreferrer" target="_blank" href="https://twitter.com/senseexception">@SenseException</a>
+            </div>
+        </section>
+
+        <section>
+            <h2>Who has a big customer-project <strong>without</strong> a database?</h2>
+        </section>
+
+        <section>
+            <img src="../images/list-of-results.png" height="817" width="673">
+        </section>
+
+        <section>
+            <img src="../images/list-of-results2.png" height="821" width="674">
+        </section>
+
+        <section>
+            <h2>Microsoft Access 2000</h2>
+        </section>
+
+        <section>
+            <h1 style="width: 500px; margin: auto">
+                <span data-fragment-index="1" class="fragment grow" style="float: left">S</span>
+                <span data-fragment-index="4" class="fragment fade-out" style="float: left">E</span>
+                <span data-fragment-index="2" class="fragment grow" style="float: left">Q</span>
+                <span data-fragment-index="4" class="fragment fade-out" style="float: left">UE</span>
+                <span data-fragment-index="3" class="fragment grow" style="float: left">L</span>
+            </h1>
+            <h3 data-fragment-index="4" class="fragment fade-up" style="clear: both; padding-top: 50px">Structured Query Language</h3>
+        </section>
+
+        <section class="top">
+            <h3>ISO/IEC 9075</h3>
+            <ul>
+                <li>SQL-86 (or SQL-87)</li>
+                <li>SQL-89</li>
+                <li>SQL-92</li>
+                <li>SQL:1999</li>
+                <li>SQL:2003</li>
+                <li>SQL:2006</li>
+                <li>SQL:2008</li>
+                <li>SQL:2011</li>
+                <li>SQL:2016</li>
+                <li>SQL:2019</li>
+            </ul>
+        </section>
+
+        <section>
+            <pre><code class="sql">
+    SELECT firstname, name FROM address_book ORDER BY name;
+            </code></pre>
+
+            <p class="text-small"><b>Select firstname</b> and <b>name from address book</b> and <b>order</b> them <b>by name</b></p>
+        </section>
+
+        <section>
+            <table>
+                <tr>
+                    <th>id</th>
+                    <th>firstname</th>
+                    <th>name</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>John</td>
+                    <td>Doe</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Jane</td>
+                    <td>Doe</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Leo</td>
+                    <td>Part</td>
+                </tr>
+            </table>
+
+            <pre><code class="sql">
+    SELECT firstname, name FROM address_book GROUP BY name;
+            </code></pre>
+
+            <p class="fragment fade-in text-red bold">ERROR: column "address_book.firstname" must appear in the GROUP BY clause or be used in an aggregate function</p>
+        </section>
+
+        <section data-background="../images/lois.png">
+            <div class="bubble-container">
+                <div class="bubble-pos1"><p class="bubble bubble-left">It's a PostgreSQL database.</p></div>
+                <div class="bubble-pos2"><p class="bubble bubble-right fragment fade-in">No!</p></div>
+                <div class="bubble-pos3"><p class="bubble bubble-left fragment fade-in">Yes!</p></div>
+                <div class="bubble-pos4"><p class="bubble bubble-right fragment fade-in">Ooooh...</p></div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Know your database!</h2>
+        </section>
+
+        <section>
+            <h2>How did you learn SQL?</h2>
+        </section>
+
+        <section class="top">
+            <div class="bg-image bg-sql-asp">
+                <div class="fragment fade-in marked mark-asp-select"></div>
+                <div class="fragment fade-in marked mark-asp-insert"></div>
+                <div class="fragment fade-in marked mark-asp-update"></div>
+            </div>
+
+        </section>
+
+        <section class="top">
+            <div class="bg-image bg-sql-php1">
+                <div class="fragment fade-in marked mark-php-select"></div>
+                <div class="fragment fade-in marked mark-php-insert"></div>
+                <div class="fragment fade-in marked mark-php-update"></div>
+                <div class="fragment fade-in marked mark-php-group"></div>
+                <div class="fragment fade-in marked mark-php-join"></div>
+            </div>
+        </section>
+
+        <section class="top">
+            <div class="bg-image bg-sql-php2" style="height: 10em">
+                <div class="fragment fade-in marked mark-php-union"></div>
+                <div class="fragment fade-in marked mark-php-table"></div>
+                <div class="fragment fade-in marked mark-php-index"></div>
+                <div class="fragment fade-in marked mark-php-mysql"></div>
+            </div>
+        </section>
+
+        <section>
+            <pre><code class="php">
+    $db = mysql_connect('127.0.0.1'):
+
+    $result = mysql_db_query('bar', 'SELECT id, name FROM foo', $db);
+    $rowCount = mysql_num_rows($result);
+
+    for ($rowPointer = 0; $rowPointer < $rowCount; $rowPointer++) {
+        echo mysql_result($result, $rowPointer,'id') . ' contains name ' .
+            mysql_result($result, $rowPointer,'name') . PHP_EOL;
+    }
+            </code></pre>
+        </section>
+
+        <section>
+            <pre><code class="php">
+    $pdo = new PDO('mysql:dbname=bar;host=127.0.0.1');
+
+    $statement = $pdo->query('SELECT id, name FROM foo');
+
+    $result = $statement->fetchAll(PDO::FETCH_CLASS, Foo::CLASS);
+
+    foreach ($result as $foo) {
+        echo $foo->getId() . ' contains name ' . $foo->getName() . PHP_EOL;
+    }
+
+            </code></pre>
+        </section>
+
+        <section>
+            <img src="../images/doctrine.png" class="transparent">
+        </section>
+
+        <section>
+            <h3>Entity</h3>
+            <pre><code class="php stretch text-small">
+    use Doctrine\ORM\Mapping as ORM;
+
+    /**
+     * @ORM\Entity
+     * @ORM\Table(name="foo")
+     */
+    class Foo
+    {
+        /**
+         * @ORM\Column(type="integer")
+         * @ORM\Id
+         * @ORM\GeneratedValue(strategy="AUTO")
+         */
+        private $id;
+
+        /**
+         * @ORM\Column(type="string")
+         */
+        private $value;
+
+        // public function __construct(string $value)
+        // public function setValue(string $value) : void
+        // ...
+    }
+            </code></pre>
+        </section>
+
+        <section class="top">
+            <h3>Insert new entity</h3>
+            <pre><code class="php">
+    $entity = new Foo('value');
+
+    $entityManager->persist($entity);
+
+    $entityManager->flush();
+            </code></pre>
+        </section>
+
+        <section class="top">
+            <h3>DQL or find()</h3>
+            <pre><code class="sql">
+    SELECT e FROM Foo e WHERE e.id = 42
+            </code></pre>
+
+            <pre><code class="php">
+    $foo = $entityManager->find(Foo::class, 42);
+            </code></pre>
+        </section>
+
+        <section>
+            <h1 class="fragment fade-in text-red text-border layer">Congratulations</h1>
+            <div>
+                <img src="../images/doctrine.png" class="transparent">
+                <h3>ORM</h3>
+            </div>
+            <h2>+</h2>
+            <div><img src="../images/sql.png" class="transparent"></div>
+        </section>
+
+        <section>
+            <h2>You have doubled your problems</h2>
+        </section>
+
+        <section>
+            <h2>ORM is awesome, but</h2>
+            <div class="fragment fade-up margin-bottom">
+                <h3>before it was:</h3>
+                <ul>
+                    <li>Know how to query</li>
+                    <li>OOP boilerplate code</li>
+                </ul>
+            </div>
+            <div class="fragment fade-up">
+                <h3>Now it is:</h3>
+                <ul>
+                    <li>Know how queries look like</li>
+                    <li>Know when queries happen</li>
+                    <li>Know how to query</li>
+                    <li>No full SQL power due to DB compatibility</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Know when queries happen -->
+
+        <section>
+            <h2>Know when queries happen</h2>
+        </section>
+
+        <section class="top">
+            <h3>Insert new entity</h3>
+            <pre><code class="php">
+    $entity = new Foo('value');
+
+    $entityManager->persist($entity);
+
+    $entityManager->flush(); // <-- There's SQL somewhere in there
+            </code></pre>
+        </section>
+
+        <section class="top">
+            <h3>Update entity (default tracking policy)</h3>
+            <pre><code class="php">
+    $entity = $entityManager
+        ->find(Foo::class, 42); // <-- There's SQL somewhere in there
+
+    $entity->setValue('new value');
+
+    $entityManager->flush(); // <-- There's SQL somewhere in there
+            </code></pre>
+        </section>
+
+        <section class="top">
+            <h3>What Unit Of Work does</h3>
+
+            <pre><code class="php">
+    $entity = $entityManager->find(Foo::class, 42);
+    
+    // ... sooo much code
+    
+    $entity = $entityManager->find(Foo::class, 42); // <-- No SQL query
+            </code></pre>
+        </section>
+
+        <section>
+            <h3>Which language?</h3>
+            <pre><code class="php stretch">
+    $de = new Language('de');
+    $en = new Language('en');
+    $it = new Language('it');
+    $entityManager->persist($de);
+    $entityManager->persist($en);
+    $entityManager->persist($it);
+
+    $movie = new Movie('The Mutex');
+    $movie->setLanguages([$de, $en, $it]);
+    $entityManager->persist($movie);
+    $entityManager->flush();
+
+    $movie = $entityManager->createQuery(
+            "SELECT m, l FROM Movie m
+            JOIN m.languages l
+            WHERE l.iso6391 = 'it' AND m.name = 'The Mutex'"
+        )
+        ->getResult();
+
+    $movie[0]->getLanguages();
+            </code></pre>
+        </section>
+
+        <section class="top">
+            <h3>All languages</h3>
+
+            <ul>
+                <li>de</li>
+                <li>en</li>
+                <li>it</li>
+            </ul>
+        </section>
+
+        <section class="top">
+            <h3>Clear EntityManager/Unit Of Work</h3>
+
+            <pre><code class="php text-small">
+    $entityManager->persist($movie);
+    $entityManager->flush();
+
+    $entityManager->clear(); // <-- Clear enities from the EntityManager/Unit Of Work
+
+    $movie = $entityManager->createQuery(
+            "SELECT m, l FROM Movie m
+            JOIN m.languages l
+            WHERE l.iso6391 = 'it' AND f.name = 'The Mutex'"
+        )
+        ->getResult();
+
+    $movie[0]->getLanguages();
+            </code></pre>
+
+        </section>
+
+        <section class="top">
+            <h3>Clear EntityManager/Unit Of Work</h3>
+
+            <pre><code class="php">
+    $entityManager->clear();
+    $entityManager->clear(Entity::class); // Deprecated
+            </code></pre>
+
+        </section>
+
+        <!--Lazy Loading-->
+
+        <section class="top">
+            <h3>Lazy/Eager Loading</h3>
+
+            <pre><code class="php">
+    class Foo
+    {
+        // ... properties and metadata
+
+        /**
+         * @var Bar[]
+         *
+         * Use LAZY or EAGER in fetch
+         * @ORM\OneToMany(targetEntity="Bar", mappedBy="foo", fetch="LAZY")
+         */
+        private $bars;
+    }
+            </code></pre>
+        </section>
+
+        <section class="top">
+            <h3>Lazy Loading</h3>
+
+            <pre><code class="php">
+  $foos = $entityManager->getRepository(Foo::class)
+      ->findAll(); // <-- There's SQL somewhere in there
+
+  foreach ($foos as $foo) {
+      foreach ($foo->getBars() as $bar) { // <-- There's SQL somewhere in there
+          // do stuff
+      }
+  }
+            </code></pre>
+
+
+        </section>
+
+        <section class="top">
+            <h3>Lazy Loading - SQL</h3>
+
+            <pre><code class="sql text-small">
+    -- findAll() returns 3 Foo entities
+    SELECT t0.id AS id_1, t0.name AS name_2 FROM foo t0
+    -- Each query is one iteration for getting the Bar relations
+    SELECT t0.id AS id_1, t0.name AS name_2, t0.foo_id AS foo_id_3 FROM bar t0 WHERE t0.foo_id = 1
+    SELECT t0.id AS id_1, t0.name AS name_2, t0.foo_id AS foo_id_3 FROM bar t0 WHERE t0.foo_id = 2
+    SELECT t0.id AS id_1, t0.name AS name_2, t0.foo_id AS foo_id_3 FROM bar t0 WHERE t0.foo_id = 3
+            </code></pre>
+        </section>
+
+        <!--Eager Loading-->
+
+        <section class="top">
+            <h3>Eager Loading</h3>
+
+            <pre><code class="php">
+    $foos = $entityManager->getRepository(Foo::class)
+        ->findAll(); // <-- There's SQL somewhere in there
+
+    foreach ($foos as $foo) {
+        foreach ($foo->getBars() as $bar) {
+            // do stuff
+        }
+    }
+            </code></pre>
+        </section>
+
+        <section class="top">
+            <h3>EAGER Loading - SQL</h3>
+
+            <pre><code class="sql text-small">
+    -- findAll() returns 3 Foo entities and joins the bar relation
+    SELECT t0.id AS id_1, t0.name AS name_2, t3.id AS id_4, t3.name AS name_5, t3.foo_id AS foo_id_6
+        FROM foo t0
+        LEFT JOIN bar t3 ON t3.foo_id = t0.id
+            </code></pre>
+        </section>
+
+        <!-- Know how queries look like -->
+
+        <section>
+            <h2>Know how queries look like</h2>
+        </section>
+
+        <section class="top">
+            <h3>Same code, different SQL</h3>
+
+            <pre><code class="sql text-small">
+    SELECT t0.id AS id_1, t0.name AS name_2 FROM foo t0
+    SELECT t0.id AS id_1, t0.name AS name_2, t0.foo_id AS foo_id_3 FROM bar t0 WHERE t0.foo_id = 1
+    SELECT t0.id AS id_1, t0.name AS name_2, t0.foo_id AS foo_id_3 FROM bar t0 WHERE t0.foo_id = 2
+    SELECT t0.id AS id_1, t0.name AS name_2, t0.foo_id AS foo_id_3 FROM bar t0 WHERE t0.foo_id = 3
+            </code></pre>
+
+            <pre><code class="sql text-small">
+    SELECT t0.id AS id_1, t0.name AS name_2, t3.id AS id_4, t3.name AS name_5, t3.foo_id AS foo_id_6
+        FROM foo t0
+        LEFT JOIN bar t3 ON t3.foo_id = t0.id
+            </code></pre>
+        </section>
+
+        <section class="top">
+            <h3>Explicit join - One query</h3>
+
+            <pre><code class="sql text-small">
+SELECT f, b FROM Entity\Foo f JOIN f.bars b
+            </code></pre>
+
+            <pre><code class="sql text-small">
+SELECT f0_.id AS id_0, f0_.name AS name_1, b1_.id AS id_2, b1_.name AS name_3, b1_.foo_id AS foo_id_4
+    FROM foo f0_
+    INNER JOIN bar b1_ ON f0_.id = b1_.foo_id
+            </code></pre>
+        </section>
+
+        <section class="top">
+            <h3>DQL &#8594; SQL</h3>
+            <pre><code class="sql">
+    SELECT a FROM Entity\AddressBook a
+            </code></pre>
+
+            <pre class="fragment fade-in"><code class="sql">
+    SELECT a0_.id AS id_0, a0_.firstname AS firstname_1, a0_.name AS name_2
+        FROM address_book a0_;
+            </code></pre>
+        </section>
+
+        <section>
+            <h2>Why should I care about the SQL parts?</h2>
+        </section>
+
+        <section class="top">
+            <pre><code class="sql text-big">
+    SELECT q FROM Entity\Qux q WHERE q.city = 'Hahnland'
+            </code></pre>
+
+            <div class="fragment fade-in">
+                <h4>Full table scan</h4>
+                <img src="../images/explain3.png" width="786" height="164">
+            </div>
+
+            <div class="fragment fade-in">
+                <h4>Index scan</h4>
+                <img src="../images/explain4.png" width="775" height="120">
+            </div>
+        </section>
+
+        <section class="top">
+            <pre><code class="sql text-big">
+    select * from qux WHERE city = 'Hahnland';
+            </code></pre>
+
+            <div class="fragment fade-in">
+                <h4>Before</h4>
+                <img src="../images/explain1.png" height="117" width="850">
+            </div>
+
+            <div class="fragment fade-in">
+                <h4>Next release</h4>
+                <img src="../images/explain2.png" height="118" width="816">
+            </div>
+        </section>
+
+        <section>
+            <h2>You can't ignore indices</h2>
+            <img src="../images/phonebook.png" class="transparent" width="658" height="436">
+        </section>
+
+        <section class="top">
+            <h3>Slow SQL queries</h3>
+
+            <ul>
+                <li>Need more resources</li>
+                <li>May lock rows / Waiting queries</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>DQL is not SQL!</h2>
+        </section>
+
+        <section class="top">
+            <h3>DBAL QueryBuilder</h3>
+            <pre><code class="php">
+    $queryBuilder->where('f.id = 1')
+        ->select('f.name', 'f.id', 'b.name as bname', 'q.stuff')
+        ->leftJoin('f', 'bar', 'b', 'b.foo_id = f.id')
+        ->from('foo', 'f')
+        ->orWhere('f.id = 2')
+        ->leftJoin('f', 'qux', 'q', 'q.foo_id = f.id'); // join order?
+
+    if ($yolo) {
+        $queryBuilder->andWhere('q.moreStuff = true');
+    }
+            </code></pre>
+        </section>
+
+        <section>
+            <h2>SQL is much more powerful</h2>
+        </section>
+
+        <section class="top">
+            <h3>Window Function</h3>
+
+            <pre><code class="sql">
+    SELECT name, department,
+        SUM(revenue) OVER (PARTITION BY department ORDER BY name)
+        FROM company;
+            </code></pre>
+
+            <table>
+                <tr>
+                    <th>name</th>
+                    <th>department</th>
+                    <th>SUM</th>
+                </tr>
+                <tr>
+                    <td>Albert</td>
+                    <td>sales</td>
+                    <td>1200</td>
+                </tr>
+                <tr>
+                    <td>Zoe</td>
+                    <td>sales</td>
+                    <td>1200</td>
+                </tr>
+                <tr>
+                    <td>Angela</td>
+                    <td>development</td>
+                    <td>1804</td>
+                </tr>
+            </table>
+        </section>
+
+        <section data-background="../images/reactionguys1.jpg">
+            <h2 class="text-white">It's that new MySQL 8 feature</h2>
+        </section>
+
+        <section data-background="../images/reactionguys2.jpg">
+            <h2 class="text-white">It's a SQL 2003 standard</h2>
+        </section>
+
+        <section>
+            <img src="../images/twitter-postgresql.png" height="266" width="634">
+        </section>
+
+        <section class="top">
+            <h3>Values List</h3>
+
+            <pre><code class="sql">
+    VALUES ('value1', 42, 1.8), ('value2', 12, 9);
+            </code></pre>
+        </section>
+
+        <section class="top">
+            <h3>Values List in DB Versions</h3>
+
+            <ul>
+                <li class="fragment fade-left">PostgreSQL: Yes - 8.2 (and earlier)</li>
+                <li class="fragment fade-left">MariaDB: Yes - 10.3</li>
+                <li class="fragment fade-left">MySQL: 8.0.19 (But with ROW syntax)</li>
+                <li class="fragment fade-left">SQL-92</li>
+            </ul>
+        </section>
+
+        <section class="top">
+            <h3>Partially implemented</h3>
+
+            <pre><code class="sql">
+    INSERT INTO foo VALUES ('value1', 42, 1.8), ('value2', 12, 9);
+            </code></pre>
+        </section>
+
+        <section class="top">
+            <h3>Column name alias</h3>
+
+            <pre><code class="sql">
+    SELECT * FROM (
+        VALUES ('value1', 42), ('value2', 12)
+    ) AS t (my_text, my_number);
+            </code></pre>
+
+            <table>
+                <tr>
+                    <th>my_text</th>
+                    <th>my_number</th>
+                </tr>
+                <tr>
+                    <td>value1</td>
+                    <td>42</td>
+                </tr>
+                <tr>
+                    <td>value2</td>
+                    <td>12</td>
+                </tr>
+            </table>
+
+            Column aliases are not supported by MariaDB 10.6
+        </section>
+
+        <section class="top">
+            <h3>JSON</h3>
+
+            <h4>MySQL/MariaDB</h4>
+
+            <pre><code class="sql">
+    SELECT JSON_OBJECT('a', name, 'b', number) AS jayson FROM foo;
+            </code></pre>
+
+            <h4>PostgreSQL</h4>
+
+            <pre><code class="sql">
+    SELECT JSON_BUILD_OBJECT('a', name, 'b', number) AS jayson FROM foo;
+            </code></pre>
+
+            <table>
+                <tr>
+                    <th>jayson</th>
+                </tr>
+                <tr>
+                    <td>{"a": "value1", "b": 42}</td>
+                </tr>
+            </table>
+        </section>
+
+        <section class="top">
+            <h3>Common Table Expression (CTE)</h3>
+
+            <pre><code class="sql">
+    WITH bar (col1, col2) AS (SELECT id, content FROM foo)
+
+    SELECT * FROM bar;
+            </code></pre>
+        </section>
+
+        <section>
+            <table>
+                <tr>
+                    <th>id</th>
+                    <th>parent_id</th>
+                    <th>name</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>NULL</td>
+                    <td>A</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>NULL</td>
+                    <td>B</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>NULL</td>
+                    <td>C</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>2</td>
+                    <td>B-1</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>1</td>
+                    <td>A-1</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>2</td>
+                    <td>B-2</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>1</td>
+                    <td>A-2</td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>5</td>
+                    <td>A-1-1</td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>5</td>
+                    <td>A-1-2</td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td>8</td>
+                    <td>A-1-1-1</td>
+                </tr>
+
+            </table>
+        </section>
+
+        <section class="top">
+            <h3>With Recursive</h3>
+
+            <pre><code class="sql">
+    WITH RECURSIVE cat AS (
+        SELECT * from category WHERE name = 'A'
+        UNION ALL
+        SELECT cat_recursive.* from category as cat_recursive
+            JOIN cat AS parent ON parent.id = cat_recursive.parent_id
+    )
+    SELECT * FROM cat;
+            </code></pre>
+        </section>
+
+        <section class="top">
+            <h3>With Recursive</h3>
+            <table>
+                <tr>
+                    <th>id</th>
+                    <th>parent_id</th>
+                    <th>name</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>NULL</td>
+                    <td>A</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>1</td>
+                    <td>A-1</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>1</td>
+                    <td>A-2</td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>5</td>
+                    <td>A-1-1</td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>5</td>
+                    <td>A-1-2</td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td>8</td>
+                    <td>A-1-1-1</td>
+                </tr>
+
+            </table>
+        </section>
+
+        <section data-background="../images/iceberg.jpg" class="top">
+            <h3>This was just the tip of the iceberg</h3>
+            <a class="credit-badge" href="https://unsplash.com/@anniespratt?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge" target="_blank" rel="noopener noreferrer">
+                <span style="display:inline-block;padding:2px 3px">
+                    <svg xmlns="http://www.w3.org/2000/svg" style="height:12px;width:auto;position:relative;vertical-align:middle;top:-1px;fill:white" viewBox="0 0 32 32"><title>unsplash-logo</title><path d="M20.8 18.1c0 2.7-2.2 4.8-4.8 4.8s-4.8-2.1-4.8-4.8c0-2.7 2.2-4.8 4.8-4.8 2.7.1 4.8 2.2 4.8 4.8zm11.2-7.4v14.9c0 2.3-1.9 4.3-4.3 4.3h-23.4c-2.4 0-4.3-1.9-4.3-4.3v-15c0-2.3 1.9-4.3 4.3-4.3h3.7l.8-2.3c.4-1.1 1.7-2 2.9-2h8.6c1.2 0 2.5.9 2.9 2l.8 2.4h3.7c2.4 0 4.3 1.9 4.3 4.3zm-8.6 7.5c0-4.1-3.3-7.5-7.5-7.5-4.1 0-7.5 3.4-7.5 7.5s3.3 7.5 7.5 7.5c4.2-.1 7.5-3.4 7.5-7.5z"></path></svg>
+                </span><span style="display:inline-block;padding:2px 3px">Annie Spratt</span>
+            </a>
+        </section>
+
+        <section>
+            <h2>Know your database!</h2>
+        </section>
+
+        <!-- ending -->
+
+        <section>
+            <h2>SQL queries need reviews like any other code</h2>
+        </section>
+
+        <section class="top">
+            <h3>Dev Toolbar</h3>
+
+            <img src="../images/toolbar2.png" class="transparent">
+        </section>
+
+        <section>
+            <h3>Dev Toolbar</h3>
+
+            <img src="../images/toolbar1.png" class="transparent">
+
+        </section>
+
+        <section data-background="../images/pmm1.png">
+        </section>
+
+        <section data-background="../images/pmm2.png">
+        </section>
+
+        <section data-background="../images/pmm3.png">
+        </section>
+
+        <section class="top">
+            <h3>SQL fiddles</h3>
+
+            <ul>
+                <li><a href="https://dbfiddle.uk" rel="nofollow noreferrer" target="_blank">dbfiddle.uk</a></li>
+                <li><a href="http://sqlfiddle.com" rel="nofollow noreferrer" target="_blank">sqlfiddle.com</a></li>
+            </ul>
+        </section>
+
+        <section>
+            <h3>SQL books</h3>
+
+            <div class="table">
+                <div>
+                    <div style="text-align: center"><img src="../images/sql-mere-mortals.jpg" height="600"></div>
+                    <div style="text-align: center"><img src="../images/sql-performance-explained.jpg" height="600"></div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h3><a rel="nofollow noreferrer" target="_blank" href="https://ocramius.github.io/doctrine-best-practices">Doctrine 2 ORM Best Practices</a></h3>
+            by Marco Pivetta (<a rel="nofollow noreferrer" target="_blank" href="https://twitter.com/ocramius">@Ocramius</a>)
+        </section>
+
+        <section class="top">
+            <h2>Thank you</h2>
+            <h3>What are your questions?</h3>
+            <div class="text-small">
+                Claudio Zizza<br>
+                <a rel="nofollow noreferrer" target="_blank" href="https://twitter.com/senseexception">@SenseException</a>
+            </div>
+        </section>
+    </div>
+</div>
+
+
+<script src="../node_modules/reveal.js/js/reveal.js"></script>
+<script src="../node_modules/reveal.js/lib/js/head.min.js"></script>
+<script type="text/javascript" src="../node_modules/reveal.js/plugin/highlight/highlight.js"></script>
+<script type="application/javascript">
+    Reveal.initialize({
+
+        dependencies: [
+            { src: '../node_modules/reveal.js/plugin/notes/notes.js', async: true }
+        ],
+        center: true,
+
+        width: 1200,
+        height: 800,
+
+        minScale: 1.0,
+        maxScale: 10.0,
+
+        rollingLinks: true,
+        transition: 'linear' // default/cube/page/concave/zoom/linear/fade/none
+    });
+</script>
+<script type="text/javascript">hljs.initHighlightingOnLoad();</script>
+</body>
+</html>

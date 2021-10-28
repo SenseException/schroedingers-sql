@@ -1,0 +1,309 @@
+.reveal section img {
+    border-width: 0;
+}
+
+.reveal section img.transparent {
+    border-width: 0;
+    box-shadow: none;
+}
+
+.reveal section .bg {
+    padding: 20px;
+}
+
+.reveal section .bg * {
+    color: #FFFFFF;
+    text-shadow: 3px  3px 3px black,
+                 3px -3px 3px black,
+                -3px  3px 3px black,
+                -3px -3px 3px black;
+}
+
+.reveal {
+    background-image: url("../../images/ipc-bg.png");
+    background-position: right top;
+    background-repeat: no-repeat;
+}
+
+body {
+    background: #add9e4;
+    background: -moz-radial-gradient(center, circle cover, #f7fbfc 0%, #add9e4 100%);
+    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, #f7fbfc), color-stop(100%, #add9e4));
+    background: -webkit-radial-gradient(center, circle cover, #f7fbfc 0%, #add9e4 100%);
+    background: -o-radial-gradient(center, circle cover, #f7fbfc 0%, #add9e4 100%);
+    background: -ms-radial-gradient(center, circle cover, #f7fbfc 0%, #add9e4 100%);
+    background: radial-gradient(center, circle cover, #f7fbfc 0%, #add9e4 100%);
+    background-color: #f7fbfc;
+}
+
+.reveal section .text-border {
+    text-shadow: -2px 0 #000, 0 2px #000, 2px 0 #000, 0 -2px #000;
+}
+
+.reveal section .text-red {
+    color: #F00;
+}
+
+.reveal section .text-small {
+    font-size: 0.8em
+}
+
+.reveal section .text-big {
+    font-size: 1.2em
+}
+
+.reveal section .bold {
+    font-weight: 900
+}
+
+.reveal section .text-white {
+    color: #FFF;
+    text-shadow: 3px 3px 5px #000;
+}
+
+.reveal section .margin-bottom {
+    margin-bottom: 2em;
+}
+
+.reveal section .layer {
+    position: absolute;
+    top: 1em;
+    left: 0;
+    width: inherit;
+    height: inherit;
+    margin: auto;
+
+    -webkit-transform: rotate(340deg);
+    -moz-transform: rotate(340deg);
+    -o-transform: rotate(340deg);
+    transform: rotate(340deg);
+}
+
+.reveal section table {
+    border: 1px solid #666;
+}
+
+.reveal section .table {
+    display: table;
+    border-collapse: separate;
+    border-spacing: 20px;
+    width: 100%;
+}
+
+.reveal section .table > div {
+    display: table-row;
+}
+
+.reveal section .table > div > div {
+    display: table-cell;
+}
+
+.reveal .slides > section.top {
+    height: 100%;
+}
+
+.reveal .slides .bg-image {
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    height: 94%;
+}
+
+.reveal .slides .bg-sql-asp {
+    background-image: url("../../images/sql-asp.jpg");
+}
+
+.reveal .slides .bg-sql-php1 {
+    background-image: url("../../images/sql-php1.jpg");
+}
+
+.reveal .slides .bg-sql-php2 {
+    background-image: url("../../images/sql-php2.jpg");
+}
+
+.reveal .slides .marked {
+    border: 2px solid #AA0000;
+    border-radius: 6em / 3em;
+
+}
+
+.reveal .slides .mark-asp-select {
+    position: relative;
+    top: 6.5em;
+    left: 9em;
+    height: 0.7em;
+    width: 6em;
+}
+
+.reveal .slides .mark-asp-insert {
+    position: relative;
+    top: 9.9em;
+    left: 12.4em;
+    height: 0.7em;
+    width: 2.3em;
+}
+
+.reveal .slides .mark-asp-update {
+    position: relative;
+    top: 11em;
+    left: 9em;
+    height: 0.7em;
+    width: 10.3em;
+}
+
+.reveal .slides .mark-php-select {
+    position: relative;
+    top: 0.9em;
+    left: 11.5em;
+    height: 0.7em;
+    width: 2.5em;
+}
+
+.reveal .slides .mark-php-insert {
+    position: relative;
+    top: 8em;
+    left: 12.1em;
+    height: 0.7em;
+    width: 2.5em;
+}
+
+.reveal .slides .mark-php-update {
+    position: relative;
+    top: 8.5em;
+    left: 9.1em;
+    height: 1.8em;
+    width: 2.5em;
+}
+
+.reveal .slides .mark-php-group {
+    position: relative;
+    top: 9em;
+    left: 9.1em;
+    height: 0.7em;
+    width: 3.2em;
+}
+
+.reveal .slides .mark-php-join {
+    position: relative;
+    top: 12.5em;
+    left: 8.8em;
+    height: 2em;
+    width: 4em;
+}
+
+.reveal .slides .mark-php-union {
+    position: relative;
+    top: 1.2em;
+    left: 8.5em;
+    height: 0.7em;
+    width: 2.5em;
+}
+
+.reveal .slides .mark-php-table {
+    position: relative;
+    top: 2.7em;
+    left: 7.5em;
+    height: 2.6em;
+    width: 9em;
+}
+
+.reveal .slides .mark-php-index {
+    position: relative;
+    top: 2.7em;
+    left: 8.3em;
+    height: 0.7em;
+    width: 2.6em;
+}
+
+.reveal .slides .mark-php-mysql {
+    position: relative;
+    top: 4.5em;
+    left: 20.8em;
+    height: 1em;
+    width: 2.7em;
+}
+
+.reveal .slides > section.top h3 {
+    margin-bottom: 2em;
+}
+
+.reveal .slides .bg h4 {
+    font-weight: 600;
+}
+
+.reveal .slides .credit-badge {
+    background-color: #000000;
+    color: #FFFFFF;
+    text-decoration: none;
+    padding: 4px 6px;
+    font-family: Helvetica, Ubuntu, Arial, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 1.2;
+    display: inline-block;
+    border-radius: 3px;
+    position: absolute;
+    left: 0;
+    bottom: 2em;
+    opacity: 0.3;
+}
+
+.bubble-container {
+    width: 60%;
+    float: right;
+}
+
+.reveal .slides .bubble {
+    position: relative;
+    margin-bottom: 20px;
+    padding: 0;
+    background: #FFFFFF;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+}
+
+.reveal .slides .bubble-left:after {
+    content: '';
+    position: absolute;
+    border-style: solid;
+    border-width: 15px 45px 15px 0;
+    border-color: transparent #FFFFFF;
+    display: block;
+    width: 0;
+    z-index: 1;
+    left: -44px;
+    top: 12px;
+}
+
+.reveal .slides .bubble-right:after {
+    content: '';
+    position: absolute;
+    border-style: solid;
+    border-width: 15px 0 15px 45px;
+    border-color: transparent #FFFFFF;
+    display: block;
+    width: 0;
+    z-index: 1;
+    right: -44px;
+    top: 12px;
+}
+
+.reveal .slides .bubble-pos1 {
+    width: 380px;
+    margin: 0 0 100px;
+}
+
+.reveal .slides .bubble-pos2 {
+    width: 100px;
+    margin-left: 200px;
+}
+
+.reveal .slides .bubble-pos3 {
+    width: 100px;
+}
+
+.reveal .slides .bubble-pos4 {
+    width: 160px;
+    margin-left: 140px;
+}
